@@ -42,17 +42,19 @@ func waitOutput(index int, out chan *taskRes) {
 		l.Fatal("No file provided")
 	} else if index == 1 {
 		c := <-out
+		fmt.Println("Upload Success:")
 		fmt.Println(c.StringWithoutFilepath())
 	} else {
 		nowShow := 0
 		resList := make([]*taskRes, index)
+		fmt.Println("Upload Success:")
 		for i := 0; i < index; i++ {
 			c := <-out
 			resList[c.Index] = c
 			if c.Index == nowShow {
 				for nowShow < index && resList[nowShow] != nil {
 					c = resList[nowShow]
-					fmt.Println(c.String())
+					fmt.Println(c.StringWithoutFilepath())
 					nowShow++
 				}
 			}
